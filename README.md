@@ -31,7 +31,7 @@ Follow these instructions to set up the project on your local machine and run th
 
 1. Clone this repository to your local machine using Git:
 
-git clone https://github.com/your-username/3d-game-project.git
+git clone https://github.com/jb46907/3d-game-project.git
 
 2. Open Unreal Engine and navigate to the "File" menu.
 
