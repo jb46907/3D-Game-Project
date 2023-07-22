@@ -1,6 +1,5 @@
 # 3D Game Project - Unreal Engine 5
 
-![Project Logo](project_logo.png)
 
 Welcome to my 3D Game Project built using Unreal Engine 5! This repository contains all the source code and assets for our exciting 3D game. Read this README to get started with the project and learn more about its features and development.
 
