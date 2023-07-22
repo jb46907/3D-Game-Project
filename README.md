@@ -58,7 +58,7 @@ Please note that these controls can be customized in the settings menu.
 
 ## Contributing
 
-We welcome contributions to our 3D Game Project. If you would like to make improvements, fix bugs, or add new features, please follow these steps:
+Welcome to contribute to my 3D game project. If you want to make improvements, correct errors or add new features, please follow these steps:
 
 1. Fork the repository on GitHub.
 
