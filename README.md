@@ -13,7 +13,6 @@ Welcome to my 3D Game Project built using Unreal Engine 5! This repository conta
   - [Running the Game](#running-the-game)
 - [Controls](#controls)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -31,7 +30,7 @@ Follow these instructions to set up the project on your local machine and run th
 
 1. Clone this repository to your local machine using Git:
 
-git clone https://github.com/jb46907/3d-game-project.git
+    git clone https://github.com/jb46907/3d-game-project.git
 
 2. Open Unreal Engine and navigate to the "File" menu.
 
@@ -74,6 +73,3 @@ We welcome contributions to our 3D Game Project. If you would like to make impro
 
 I will review your pull request and, if everything looks good, we'll merge it.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute the code following the terms of the license.
