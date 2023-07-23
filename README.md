@@ -17,12 +17,12 @@ Welcome to my 3D Game Project built using Unreal Engine 5! This repository conta
 
 My 3D Game Project, developed with Unreal Engine 5, presents you a simple and interesting puzzle game with 8 levels that are increasingly difficult than the previous one and with new puzzle elements
 
-##Screenshots of the game
+## Screenshots of the game
+
 ![Screenshot](Images/Screenshot.png)
 ![Screenshot](Images/ScreenshotMainMenu.png)
 ![Screenshot](Images/ScreenshotInGame.png)
 ![Screenshot](Images/ScreenshotPauseMenu.png)
-
 
 ## Getting Started
 
