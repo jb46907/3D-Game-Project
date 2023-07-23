@@ -11,7 +11,6 @@ Welcome to my 3D Game Project built using Unreal Engine 5! This repository conta
   - [Installation](#installation)
   - [Running the Game](#running-the-game)
 - [Controls](#controls)
-- [Contributing](#contributing)
 
 ## Introduction
 
@@ -55,20 +54,3 @@ Here are the default controls to navigate through the game:
 - P: Pause the game or open the in-game menu.
 
 Please note that these controls can be customized in the settings menu.
-
-## Contributing
-
-Welcome to contribute to my 3D game project. If you want to make improvements, correct errors or add new features, please follow these steps:
-
-1. Fork the repository on GitHub.
-
-2. Create a new branch with a descriptive name for your changes.
-
-3. Make your changes and commit them with clear commit messages.
-
-4. Push your branch to your forked repository.
-
-5. Create a pull request to merge your changes into the main repository.
-
-I will review your pull request and, if everything looks good, we'll merge it.
-
