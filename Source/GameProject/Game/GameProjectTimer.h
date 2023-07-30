@@ -33,6 +33,7 @@ private:
 	float TimerDuration;
 
 	FTimerHandle TimerHandle;
+	
 	int ElapsedTime;
 	
 	bool bTimerRunning;

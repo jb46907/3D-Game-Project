@@ -4,6 +4,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/AudioComponent.h"
+#include "Niagara/Public/NiagaraComponent.h"
 #include "Sound/SoundCue.h"
 #include "GameProjectItemBase.generated.h"
 
@@ -34,4 +35,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	USoundCue* CoinSound;
+
+	UPROPERTY(EditAnywhere, Category = "Particles")
+	UNiagaraComponent* NiagaraComponent;
 };

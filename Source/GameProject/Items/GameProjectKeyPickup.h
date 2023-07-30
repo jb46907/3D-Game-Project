@@ -26,6 +26,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EKeyType KeyType;
 
+	virtual void Tick(float DeltaTime) override;
+
+	void AddMovementsToActor(float DeltaTime);
+
 protected:
 	UPROPERTY(VisibleAnywhere)
 	class UStaticMeshComponent* KeyMesh;

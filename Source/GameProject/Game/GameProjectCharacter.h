@@ -15,7 +15,11 @@ UENUM(BlueprintType)
 enum class EMovementDirection : uint8
 {
 	Forward,
+	ForwardRight,
+	ForwardLeft,
 	Backward,
+	BackwardRight,
+	BackwardLeft,
 	Left,
 	Right
 };
@@ -36,8 +40,11 @@ protected:
 	class UAudioComponent* FootStepSoundComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
-	USoundCue* FootStepSound;
+	USoundCue* BackgroundSound;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundCue* FootstepSoundCue;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
 	EMovementDirection LastMovementDirection;
 
@@ -66,6 +73,9 @@ public:
 	
 	UPROPERTY()
 	bool bTimesUp;
+
+	UPROPERTY();
+	float FootstepCooldown;
 
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = 1.0f;

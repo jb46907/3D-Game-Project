@@ -7,7 +7,7 @@
 
 AGameProjectKeyPickup::AGameProjectKeyPickup()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	KeyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("KeyMesh"));
 	RootComponent = KeyMesh;
@@ -20,6 +20,12 @@ AGameProjectKeyPickup::AGameProjectKeyPickup()
 	KeySoundComponent->SetSound(KeyPickupSound);
 	
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AGameProjectKeyPickup::OnKeyOverlap);
+}
+
+void AGameProjectKeyPickup::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AddMovementsToActor(DeltaTime);
 }
 
 void AGameProjectKeyPickup::OnKeyOverlap(
@@ -52,3 +58,20 @@ void AGameProjectKeyPickup::OnKeyOverlap(
 		Destroy();
 	}
 }
+
+void AGameProjectKeyPickup::AddMovementsToActor(float DeltaTime)
+{
+	// Yaw rotation (left and right)
+	float RotationSpeedYaw = -45.0f;
+	float OscillationSpeed = 2.0f;
+	float OscillationAmplitude = 15.0f;
+	
+	FRotator RotationDeltaYaw(0.0f, RotationSpeedYaw * DeltaTime, 0.0f);
+	AddActorLocalRotation(RotationDeltaYaw);
+	
+	FVector NewLocation = GetActorLocation();
+	float PitchOffset = FMath::Sin(GetGameTimeSinceCreation() * OscillationSpeed) * OscillationAmplitude;
+	NewLocation.Z = 60.0f + PitchOffset; // Adjust the base height (30.0f) as needed
+	SetActorLocation(NewLocation);
+}
+

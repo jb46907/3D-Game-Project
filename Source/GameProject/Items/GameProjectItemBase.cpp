@@ -15,8 +15,13 @@ AGameProjectItemBase::AGameProjectItemBase()
 	CoinSoundComponent = CreateDefaultSubobject<UAudioComponent>("CoinSoundComponent");
 	CoinSoundComponent->SetupAttachment(RootComponent);
 	CoinSoundComponent->SetSound(CoinSound);
+
+	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
+	NiagaraComponent->SetupAttachment(RootComponent);
+	NiagaraComponent->Deactivate();
 	
 	Mesh->OnComponentBeginOverlap.AddDynamic(this, &AGameProjectItemBase::OverLapBegin);
+	
 }
 
 void AGameProjectItemBase::BeginPlay()
@@ -45,8 +50,17 @@ void AGameProjectItemBase::OverLapBegin(
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, CoinSound, GetActorLocation());
 		}
-		Destroy();
+		if (NiagaraComponent && NiagaraComponent->IsValidLowLevel())
+		{
+			NiagaraComponent->SetWorldLocation(Mesh->GetRelativeLocation());
+				
+			if (!NiagaraComponent->IsActive())
+			{
+				NiagaraComponent->Activate();
+			}
+		}
 		GameMode->ItemCollected();
+		Destroy();
 	}
 }
 
