@@ -11,7 +11,7 @@ AGameProjectCharacter::AGameProjectCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	
-	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
+	PlayerCamera = CreateDefaultSubobject<UCameraComponent>("PlayerCamera");
 	PlayerCamera->SetupAttachment(GetCapsuleComponent());
 	CharacterMesh = FindComponentByClass<USkeletalMeshComponent>();
 	
@@ -42,8 +42,8 @@ void AGameProjectCharacter::Tick(float DeltaTime)
 		 
 	}
 
-	float ForwardValue = GetInputAxisValue(TEXT("MoveForward"));
-	float RightValue = GetInputAxisValue(TEXT("MoveRight"));
+	float ForwardValue = GetInputAxisValue("MoveForward");
+	float RightValue = GetInputAxisValue("MoveRight");
 
 	if (ForwardValue != 0.0f || RightValue != 0.0f)
 	{
@@ -115,15 +115,15 @@ void AGameProjectCharacter::Tick(float DeltaTime)
 void AGameProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AGameProjectCharacter::MoveForward);
-	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &AGameProjectCharacter::MoveRight);
-	PlayerInputComponent->BindAction(TEXT("PauseGame"), IE_Pressed,this, &AGameProjectCharacter::CheckPause);
+	PlayerInputComponent->BindAxis("MoveForward", this, &AGameProjectCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &AGameProjectCharacter::MoveRight);
+	PlayerInputComponent->BindAction("PauseGame", IE_Pressed,this, &AGameProjectCharacter::CheckPause);
 }
 
 void AGameProjectCharacter::MoveForward(float Value)
 {
 
-	FVector MovementDirection = (GetActorForwardVector() * Value + GetActorRightVector() * GetInputAxisValue(TEXT("MoveRight"))).GetSafeNormal();
+	FVector MovementDirection = (GetActorForwardVector() * Value + GetActorRightVector() * GetInputAxisValue("MoveRight")).GetSafeNormal();
 
 	AddMovementInput(MovementDirection, MoveSpeed);
 
@@ -138,7 +138,7 @@ void AGameProjectCharacter::MoveForward(float Value)
 
 void AGameProjectCharacter::MoveRight(float Value)
 {
-	FVector MovementDirection = (GetActorForwardVector() * GetInputAxisValue(TEXT("MoveForward")) + GetActorRightVector() * Value).GetSafeNormal();
+	FVector MovementDirection = (GetActorForwardVector() * GetInputAxisValue("MoveForward") + GetActorRightVector() * Value).GetSafeNormal();
 
 	AddMovementInput(MovementDirection, MoveSpeed);
 
