@@ -9,10 +9,10 @@ AGameProjectLockInteraction::AGameProjectLockInteraction()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	LockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorMesh"));
+	LockMesh = CreateDefaultSubobject<UStaticMeshComponent>("DoorMesh");
 	RootComponent = LockMesh;
 
-	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>("CollisionBox");
 	CollisionBox->SetupAttachment(RootComponent);
 
 	LockSoundComponent = CreateDefaultSubobject<UAudioComponent>("ButtonSoundComponent");

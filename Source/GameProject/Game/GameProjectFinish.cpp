@@ -46,10 +46,11 @@ void AGameProjectFinish::OverlapBegin(
 		if (GameMode && GameMode->AreAllItemsCollected())
 		{
 			GameMode->StopTimer();
+			
 			const FString NextLevelString = NextLevelName.ToString();
 			if (!NextLevelString.IsEmpty())
 			{
-				UGameplayStatics::OpenLevel(GetWorld(), NextLevelName);
+				GameMode->ShowWinWidget(NextLevelName);
 			}
 		}
 	}

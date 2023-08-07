@@ -8,10 +8,10 @@ AGameProjectARotatingPlatform::AGameProjectARotatingPlatform()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    PlatformCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("PlatformCollision"));
+    PlatformCollision = CreateDefaultSubobject<UBoxComponent>("PlatformCollision");
     RootComponent = PlatformCollision;
     
-    PlatformMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlatformMesh"));
+    PlatformMesh = CreateDefaultSubobject<UStaticMeshComponent>("PlatformMesh");
     PlatformMesh->SetupAttachment(PlatformCollision);
 
     PlatformSoundComponent = CreateDefaultSubobject<UAudioComponent>("ButtonSoundComponent");
@@ -22,6 +22,8 @@ AGameProjectARotatingPlatform::AGameProjectARotatingPlatform()
     PlatformCollision->OnComponentEndOverlap.AddDynamic(this, &AGameProjectARotatingPlatform::OnOverlapEnd);
     
     OriginalMeshRotation = PlatformMesh->GetRelativeRotation();
+    RotationAngle = 90.0f;
+    RotationSpeed = 1.0f;
     TargetRotation = FRotator(0, RotationAngle, 0);
     bIsRotating = false;
 }

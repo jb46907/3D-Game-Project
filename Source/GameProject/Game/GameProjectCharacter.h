@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "Engine/StaticMesh.h"
 #include "Camera/CameraComponent.h"
+
 #include "Components/CapsuleComponent.h"
 #include "Components/AudioComponent.h"
 #include "Sound/SoundCue.h"
@@ -67,7 +68,10 @@ public:
 	bool bHasKeyBlue = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bHasKeyGrey = false;
-
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character")
+	FVector SpawnLocation;
+	
 	UPROPERTY()
 	bool Pausing;
 	
@@ -78,7 +82,7 @@ public:
 	float FootstepCooldown;
 
 	UPROPERTY(EditAnywhere)
-	float MoveSpeed = 1.0f;
+	float MoveSpeed;
 	
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* PlayerMesh;

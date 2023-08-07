@@ -1,6 +1,10 @@
 #include "GameProjectCharacter.h"
 #include "GameProjectGameModeBase.h"
+#include "GameProjectGameOverWidget.h"
+#include "Blueprint/UserWidget.h"
 #include "AssetTypeActions/AssetDefinition_SoundBase.h"
+#include "GameFramework/PlayerStart.h"
+#include "../Items/GameProjectTrapBase.h"
 #include "Kismet/GameplayStatics.h"
 
 AGameProjectCharacter::AGameProjectCharacter()
@@ -108,7 +112,6 @@ void AGameProjectCharacter::Tick(float DeltaTime)
 	}
 }
 
-// Called to bind functionality to input
 void AGameProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -119,7 +122,7 @@ void AGameProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 void AGameProjectCharacter::MoveForward(float Value)
 {
-	// Calculate the combined movement vector and normalize it
+
 	FVector MovementDirection = (GetActorForwardVector() * Value + GetActorRightVector() * GetInputAxisValue(TEXT("MoveRight"))).GetSafeNormal();
 
 	AddMovementInput(MovementDirection, MoveSpeed);
@@ -127,16 +130,14 @@ void AGameProjectCharacter::MoveForward(float Value)
 	if (FootstepSoundCue && Value != 0.0f && FootstepCooldown <= 0.0f)
 	{
 		UGameplayStatics::PlaySound2D(this, FootstepSoundCue);
-		FootstepCooldown = 0.8f; // Set a cooldown duration (adjust the value as needed)
+		FootstepCooldown = 0.8f;
 	}
-
-	// Reduce the cooldown time each frame (adjust the value as needed)
+	
 	FootstepCooldown -= GetWorld()->GetDeltaSeconds();
 }
 
 void AGameProjectCharacter::MoveRight(float Value)
 {
-	// Calculate the combined movement vector and normalize it
 	FVector MovementDirection = (GetActorForwardVector() * GetInputAxisValue(TEXT("MoveForward")) + GetActorRightVector() * Value).GetSafeNormal();
 
 	AddMovementInput(MovementDirection, MoveSpeed);
@@ -144,10 +145,9 @@ void AGameProjectCharacter::MoveRight(float Value)
 	if (FootstepSoundCue && Value != 0.0f && FootstepCooldown <= 0.0f)
 	{
 		UGameplayStatics::PlaySound2D(this, FootstepSoundCue);
-		FootstepCooldown = 0.8f; // Set a cooldown duration (adjust the value as needed)
+		FootstepCooldown = 0.8f;
 	}
-
-	// Reduce the cooldown time each frame (adjust the value as needed)
+	
 	FootstepCooldown -= GetWorld()->GetDeltaSeconds();
 }
 
@@ -166,10 +166,10 @@ void AGameProjectCharacter::CheckPause()
 void AGameProjectCharacter::Die()
 {
 	AGameProjectGameModeBase* GameMode = Cast<AGameProjectGameModeBase>(GetWorld()->GetAuthGameMode());
+	GameMode->RemainingLife();
 	if (GameMode)
 	{
-		FString LevelName = UGameplayStatics::GetCurrentLevelName(GetWorld(), true);
-		UGameplayStatics::OpenLevel(GetWorld(), FName(LevelName), true);
+		GameMode->GameOver();
 	}
 }
 

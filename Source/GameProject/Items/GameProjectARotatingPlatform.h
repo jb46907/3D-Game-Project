@@ -24,10 +24,10 @@ public:
 	UStaticMeshComponent* PlatformMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Settings")
-	float RotationSpeed = 1.0f;
+	float RotationSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Settings")
-	float RotationAngle = 90.0f;
+	float RotationAngle;
 
 	UFUNCTION()
 	void RotatePlatform();

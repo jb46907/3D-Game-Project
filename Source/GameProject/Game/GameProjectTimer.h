@@ -30,11 +30,11 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float TimerDuration;
+	float EndDuration;
 
 	FTimerHandle TimerHandle;
 	
-	int ElapsedTime;
+	int TimerDuration;
 	
 	bool bTimerRunning;
 };

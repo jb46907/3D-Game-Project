@@ -9,8 +9,8 @@ AGameProjectTimer::AGameProjectTimer()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	
-	TimerDuration = 0.0f;
-	ElapsedTime = 300.0f;
+	EndDuration = 0.0f;
+	TimerDuration = 300.0f;
 	bTimerRunning = false;
 }
 
@@ -23,7 +23,6 @@ void AGameProjectTimer::StartTimer()
 {
 	if (!bTimerRunning)
 	{
-		// ElapsedTime = 0.0f;
 		bTimerRunning = true;
 		GetWorldTimerManager().SetTimer(TimerHandle, this, &AGameProjectTimer::TimerCallback, 1.0f, true);
 	}
@@ -41,13 +40,13 @@ void AGameProjectTimer::StopTimer()
 
 int AGameProjectTimer::GetElapsedTime() const
 {
-	return ElapsedTime;
+	return TimerDuration;
 }
 
 void AGameProjectTimer::TimerCallback()
 {
-	ElapsedTime -= 1.0f;
-	if (ElapsedTime <= TimerDuration)
+	TimerDuration -= 1.0f;
+	if (TimerDuration <= EndDuration)
 	{
 		AGameProjectCharacter* ProjectCharacter = Cast<AGameProjectCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 		if (ProjectCharacter)

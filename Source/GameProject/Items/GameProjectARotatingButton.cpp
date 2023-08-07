@@ -7,14 +7,12 @@ AGameProjectARotatingButton::AGameProjectARotatingButton()
 {
     PrimaryActorTick.bCanEverTick = false;
 
-    ButtonCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("ButtonCollision"));
+    ButtonCollision = CreateDefaultSubobject<UBoxComponent>("ButtonCollision");
     RootComponent = ButtonCollision;
 
-    ButtonMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TrapMesh"));
+    ButtonMesh = CreateDefaultSubobject<UStaticMeshComponent>("TrapMesh");
     ButtonMesh->SetupAttachment(ButtonCollision);
-
-    ButtonCollision->OnComponentBeginOverlap.AddDynamic(this, &AGameProjectARotatingButton::OnOverlapBegin);
-
+    
     ButtonSoundComponent = CreateDefaultSubobject<UAudioComponent>("ButtonSoundComponent");
     ButtonSoundComponent->SetupAttachment(RootComponent);
     ButtonSoundComponent->SetSound(ButtonSound);
@@ -22,9 +20,10 @@ AGameProjectARotatingButton::AGameProjectARotatingButton()
     OriginalMeshLocation = ButtonMesh->GetRelativeLocation();
     
     bIsBtnPressed = false;
-
-    ButtonMeshOffsetZ = 40.0f;
     bIsBtnActive = false;
+    ButtonMeshOffsetZ = 40.0f;
+    
+    ButtonCollision->OnComponentBeginOverlap.AddDynamic(this, &AGameProjectARotatingButton::OnOverlapBegin);
 }
 
 void AGameProjectARotatingButton::BeginPlay()
@@ -112,5 +111,3 @@ void AGameProjectARotatingButton::CheckButtonState()
         }
     }
 }
-
-

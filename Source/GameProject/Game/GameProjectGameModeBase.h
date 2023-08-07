@@ -15,12 +15,28 @@ class GAMEPROJECT_API AGameProjectGameModeBase : public AGameModeBase
 protected:
 	int32 ItemsCollected = 0;
 	int32 ItemsInLevel = 0;
+	int32 Lives = 3;
 
+	UPROPERTY(BlueprintReadOnly)
+	FName NextLevelName;
+	
 	UPROPERTY(EditAnywhere, Category="Widgets")
 	TSubclassOf<class UUserWidget> GameWidgetClass;
 
 	UPROPERTY()
 	UGameProjectWidget* GameWidget;
+
+	UPROPERTY(EditAnywhere, Category="Widgets")
+	TSubclassOf<class UUserWidget> GameOverWidgetClass;
+
+	UPROPERTY()
+	class UGameProjectGameOverWidget* GameOverWidget;
+
+	UPROPERTY(EditAnywhere, Category="Widgets")
+	TSubclassOf<class UUserWidget> GameWinWidgetClass;
+
+	UPROPERTY()
+	class UGameProjectWinWidget* GameWinWidget;
 
 	UPROPERTY()
 	class AGameProjectTimer* TimerManager;
@@ -47,4 +63,14 @@ public:
 	bool AreAllItemsCollected() const;
 	
 	void ItemCollected();
+
+	void RemainingLife();
+
+	int32 GetLives() const;
+
+	void RespawnCharacter(AGameProjectCharacter* Character);
+
+	void GameOver();
+
+	void ShowWinWidget(FName NextLevel);
 };

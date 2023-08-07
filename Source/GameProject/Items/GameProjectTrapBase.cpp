@@ -9,25 +9,21 @@ AGameProjectTrapBase::AGameProjectTrapBase()
 {
     PrimaryActorTick.bCanEverTick = false;
     
-    TrapCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("TrapCollision"));
+    TrapCollision = CreateDefaultSubobject<UBoxComponent>("TrapCollision");
     RootComponent = TrapCollision;
     
-    TrapMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TrapMesh"));
+    TrapMesh = CreateDefaultSubobject<UStaticMeshComponent>("TrapMesh");
     TrapMesh->SetupAttachment(TrapCollision);
-    
-    OriginalMeshLocation = TrapMesh->GetRelativeLocation();
-    
-    bTrapActive = false;
-    bTrapTriggered = true;
-    TrapMeshOffsetZ = -40.0f;
-
-    FVector NewMeshLocation = TrapMesh->GetRelativeLocation();
-    NewMeshLocation.Z = TrapMeshOffsetZ;
-    TrapMesh->SetRelativeLocation(NewMeshLocation);
 
     TrapSoundComponent = CreateDefaultSubobject<UAudioComponent>("ButtonSoundComponent");
     TrapSoundComponent->SetupAttachment(RootComponent);
     TrapSoundComponent->SetSound(TrapSound);
+    
+    OriginalMeshLocation = TrapMesh->GetRelativeLocation();
+    
+    bTrapActive = false;
+    bTrapTriggered = false;
+    TrapMeshOffsetZ = 30.0f;
     
     TrapCollision->OnComponentBeginOverlap.AddDynamic(this, &AGameProjectTrapBase::OnTrapOverlapBegin);
     TrapCollision->OnComponentEndOverlap.AddDynamic(this, &AGameProjectTrapBase::OnTrapOverlapEnd);
@@ -46,9 +42,9 @@ void AGameProjectTrapBase::OnTrapOverlapBegin(
     bool bFromSweep,
     const FHitResult& SweepResult)
 {
+    AGameProjectCharacter* PlayerCharacter = Cast<AGameProjectCharacter>(OtherActor);
     if (!bTrapActive)
     {
-        AGameProjectCharacter* PlayerCharacter = Cast<AGameProjectCharacter>(OtherActor);
         if (PlayerCharacter)
         {
             bTrapActive = true;
@@ -56,11 +52,10 @@ void AGameProjectTrapBase::OnTrapOverlapBegin(
     }
     else
     {
-        AGameProjectCharacter* PlayerCharacter = Cast<AGameProjectCharacter>(OtherActor);
-        if (PlayerCharacter && !bTrapTriggered)
+        if (PlayerCharacter && bTrapTriggered)
         {
             PlayerCharacter->Die();
-            bTrapTriggered = true;
+            bTrapTriggered = false;
         }
     }
 }
@@ -77,7 +72,7 @@ void AGameProjectTrapBase::OnTrapOverlapEnd(
         {
             UGameplayStatics::PlaySoundAtLocation(this, TrapSound, GetActorLocation());
         }
-        TrapMesh->SetRelativeLocation(OriginalMeshLocation);
-        bTrapTriggered = false;
+        TrapMesh->SetRelativeLocation(OriginalMeshLocation + FVector(0,0,TrapMeshOffsetZ));
+        bTrapTriggered = true;
     }
 }
