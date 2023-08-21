@@ -67,5 +67,5 @@ void AGameProjectItemBase::AddRotationToActor(float DeltaTime)
 {
 	float RotationSpeed = 45.0f;
 	FRotator RotationDelta(0.0f, RotationSpeed * DeltaTime, 0.0f);
-	// AddActorLocalRotation(RotationDelta);
+	AddActorLocalRotation(RotationDelta);
 }

@@ -2,7 +2,7 @@
 #include "GameProjectGameModeBase.h"
 #include "GameProjectGameOverWidget.h"
 #include "Blueprint/UserWidget.h"
-#include "AssetTypeActions/AssetDefinition_SoundBase.h"
+
 #include "GameFramework/PlayerStart.h"
 #include "../Items/GameProjectTrapBase.h"
 #include "Kismet/GameplayStatics.h"
