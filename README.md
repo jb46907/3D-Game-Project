@@ -6,8 +6,8 @@ Welcome to my 3D Game Project built using Unreal Engine 5! This repository conta
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Video of the game](#Video-of-the-game)
-- [Screenshots of the game](#Screenshots-of-the-game)
+- [Video of the game](#video-of-the-game)
+- [Screenshots of the game](#screenshots-of-the-game)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
